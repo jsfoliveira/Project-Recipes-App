@@ -11,12 +11,6 @@ class Login extends React.Component {
     };
   }
 
-  // handleClick = (event) => {
-  //   event.preventDefault();
-  //   const { emailInput } = this.state;
-
-  // }
-
   validateForm = () => {
     const { emailInput, passwordInput } = this.state;
     const numberMin = 6;
@@ -33,7 +27,7 @@ class Login extends React.Component {
     }
     localStorage.setItem('mealsToken', JSON.stringify(1));
     localStorage.setItem('cocktailsToken', JSON.stringify(1));
-    localStorage.setItem('user', JSON.stringify({ emailInput }));
+    localStorage.setItem('user', JSON.stringify({ email: emailInput }));
   }
 
   handleChange = (event) => {
