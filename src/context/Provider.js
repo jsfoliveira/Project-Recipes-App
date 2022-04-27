@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import myContext from './myContext';
 
 function Provider(props) {
+  const [headerText, setHeaderText] = useState('');
+  const [path, setPath] = useState('');
   const { children } = props;
+  const contextValue = {
+    headerText,
+    path,
+    setPath,
+    setHeaderText,
+  };
   return (
     <div>
-      <myContext.Provider value={ values }>
+      <myContext.Provider value={ contextValue }>
         {children}
       </myContext.Provider>
     </div>

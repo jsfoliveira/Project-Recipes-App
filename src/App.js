@@ -18,27 +18,32 @@ import ExploreFoods from './pages/Explore/ExploreFoods';
 import FoodIngredients from './pages/Explore/FoodIngredients';
 import DrinkIngredients from './pages/Explore/DrinkIngredients';
 import FoodNationalities from './pages/Explore/FoodNationalities';
+import Header from './components/Header';
+import Provider from './context/Provider';
 
 function App() {
   return (
-    <Switch>
-      <Route exact path="/" component={ Login } />
-      <Route path="/foods" component={ Food } />
-      <Route path="/drinks" component={ Drink } />
-      <Route path="/explore" component={ Explore } />
-      <Route path="/profile" component={ Profile } />
-      <Route path="/done-recipes" component={ DoneRecipes } />
-      <Route path="/favorite-recipes" component={ FavoriteRecipes } />
-      <Route path="/foods/:id" component={ FoodDetails } />
-      <Route path="/drinks/:id" component={ DrinkDetails } />
-      <Route path="/foods/:id/in-progress" component={ FoodProgress } />
-      <Route path="/drinks/:id/in-progress" component={ DrinkProgress } />
-      <Route path="/explore/drinks" component={ ExploreDrinks } />
-      <Route path="/explore/foods" component={ ExploreFoods } />
-      <Route path="/explore/foods/ingredients" component={ FoodIngredients } />
-      <Route path="/explore/drinks/ingredients" component={ DrinkIngredients } />
-      <Route path="/explore/foods/nationalities" component={ FoodNationalities } />
-    </Switch>
+    <Provider>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={ Login } />
+        <Route path="/foods" component={ Food } />
+        <Route path="/drinks" component={ Drink } />
+        <Route path="/explore" component={ Explore } />
+        <Route path="/profile" component={ Profile } />
+        <Route path="/done-recipes" component={ DoneRecipes } />
+        <Route path="/favorite-recipes" component={ FavoriteRecipes } />
+        <Route path="/foods/:id" component={ FoodDetails } />
+        <Route path="/drinks/:id" component={ DrinkDetails } />
+        <Route path="/foods/:id/in-progress" component={ FoodProgress } />
+        <Route path="/drinks/:id/in-progress" component={ DrinkProgress } />
+        <Route path="/explore/drinks" component={ ExploreDrinks } />
+        <Route path="/explore/foods" component={ ExploreFoods } />
+        <Route path="/explore/foods/ingredients" component={ FoodIngredients } />
+        <Route path="/explore/drinks/ingredients" component={ DrinkIngredients } />
+        <Route path="/explore/foods/nationalities" component={ FoodNationalities } />
+      </Switch>
+    </Provider>
   );
 }
 

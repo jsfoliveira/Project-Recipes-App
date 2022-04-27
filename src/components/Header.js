@@ -1,48 +1,57 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import myContext from '../context/myContext';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import './Header.css';
+import './styles/Header.css';
 
 export default function Header() {
+  const { headerText, setHeaderText, path, setPath } = useContext(myContext);
   const history = useHistory();
-  const { location: { pathname } } = history;
-  console.log(pathname);
-  const headerText = () => {
+  useEffect(() => {
+    const { location: { pathname } } = history;
+    setPath(pathname);
+    console.log(path);
     switch (pathname) {
-    case '/ingredients' || '/main' || '/foods':
-      return 'Food';
+    case '/main':
+      return setHeaderText('Food');
+    case '/ingredients':
+      return setHeaderText('Food');
+    case '/foods':
+      return setHeaderText('Food');
     case '/explore':
       return 'Explore';
-    case '/exploreFood' || '/favorites':
-      return 'Explore Food';
+    case '/exploreFood':
+      return setHeaderText('Explore Food');
+    case '/favorites':
+      return setHeaderText('Explore Food');
     case '/favoriteRecipes':
-      return 'Favorite Recipes';
+      return setHeaderText('Favorite Recipes');
     case '/doneRecipes':
-      return 'Done Recipes';
+      return setHeaderText('Done Recipes');
     case '/profile':
-      return 'Profile';
+      return setHeaderText('Profile');
     case '/nationality':
-      return 'Explore Nationalities';
+      return setHeaderText('Explore Nationalities');
     default:
-      return 'Default';
+      return setHeaderText('Default');
     }
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <header>
-      {
-        pathname !== '/'
-        && (
-          <div className="header__user">
-            <button data-testid="profile-top-btn" type="button">
-              <img alt="profileIcon" src={ profileIcon } />
-            </button>
-            <h1 data-testid="page-title">{ headerText() }</h1>
-            <button data-testid="page-title" type="button">
-              <img alt="profileIcon" src={ searchIcon } />
-            </button>
-          </div>)
-      }
+      {path !== '/'
+      && (
+        <div className="header__user">
+          <button type="button">
+            <img data-testid="profile-top-btn" alt="profileIcon" src={ profileIcon } />
+          </button>
+          <h1 data-testid="page-title">{ headerText }</h1>
+          <button type="button">
+            <img data-testid="search-top-btn" alt="profileIcon" src={ searchIcon } />
+          </button>
+        </div>)}
     </header>
   );
 }
