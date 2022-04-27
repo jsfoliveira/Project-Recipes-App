@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -41,37 +42,55 @@ class Login extends React.Component {
   render() {
     const { emailInput, passwordInput, isButtonDisabled } = this.state;
     return (
-      <form>
-        <label htmlFor="emailInput">
-          <input
-            id="emailInput"
-            name="emailInput"
-            type="text"
-            value={ emailInput }
-            onChange={ this.handleChange }
-            data-testid="email-input"
-          />
-        </label>
-        <label htmlFor="passwordInput">
-          <input
-            id="passwordInput"
-            type="text"
-            name="passwordInput"
-            value={ passwordInput }
-            onChange={ this.handleChange }
-            data-testid="password-input"
-          />
-        </label>
-        <Link to="/foods">
-          <button
-            type="submit"
-            data-testid="login-submit-btn"
-            disabled={ isButtonDisabled }
-          >
-            Enter
-          </button>
-        </Link>
-      </form>
+      <div className="login d-flex justify-content-center align-items-center">
+        <form className="form-login">
+          <div className="mb-3">
+            <label
+              htmlFor="emailInput"
+              className="form-label"
+            >
+              Email address
+              <input
+                className="form-control"
+                aria-describedby="emailHelp"
+                id="emailInput"
+                name="emailInput"
+                type="text"
+                value={ emailInput }
+                onChange={ this.handleChange }
+                data-testid="email-input"
+              />
+            </label>
+          </div>
+          <div className="mb-3">
+            <label
+              htmlFor="passwordInput"
+              className="form-label"
+            >
+              Password
+              <input
+                className="form-control"
+                id="passwordInput"
+                type="password"
+                name="passwordInput"
+                value={ passwordInput }
+                onChange={ this.handleChange }
+                data-testid="password-input"
+              />
+            </label>
+          </div>
+          <Link to="/foods">
+            <button
+              type="submit"
+              className="btn btn-primary d-flex justify-content-center align-items-center"
+              data-testid="login-submit-btn"
+              disabled={ isButtonDisabled }
+            >
+              Enter
+            </button>
+          </Link>
+        </form>
+      </div>
     );
   }
 }
