@@ -1,15 +1,15 @@
+.form-login {
+  background-color: rgba(149, 146, 146, 0.4);
+  height: 300px;
+  padding: 40px;
+  width: 300px;
+}
+
 .login {
-  height: 100vh;
-  width: 100vw;
   background-image: url('../assets/login.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-.form-login {
-  height: 300px;
-  width: 300px;
-  padding: 40px;
-  background-color: rgba(149, 146, 146, 0.4);
+  height: 100vh;
+  width: 100vw;
 }
