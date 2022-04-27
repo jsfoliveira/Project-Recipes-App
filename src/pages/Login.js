@@ -13,9 +13,10 @@ class Login extends React.Component {
 
   validateForm = () => {
     const { emailInput, passwordInput } = this.state;
+    const email = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     const numberMin = 6;
-    const passwordValidation = passwordInput.length >= numberMin;
-    const emailValidation = emailInput.match(/\S+@\S+\.\S+/);
+    const passwordValidation = passwordInput.length > numberMin;
+    const emailValidation = emailInput.match(email);
     if (emailValidation && passwordValidation) {
       this.setState({
         isButtonDisabled: false,
@@ -63,9 +64,9 @@ class Login extends React.Component {
         </label>
         <Link to="/foods">
           <button
-            type="button"
-            disabled={ isButtonDisabled }
+            type="submit"
             data-testid="login-submit-btn"
+            disabled={ isButtonDisabled }
           >
             Enter
           </button>
