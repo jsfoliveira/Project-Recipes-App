@@ -7,9 +7,10 @@ import './Header.css';
 export default function Header() {
   const history = useHistory();
   const { location: { pathname } } = history;
+  console.log(pathname);
   const headerText = () => {
     switch (pathname) {
-    case '/igredients' || '/main' || '/':
+    case '/ingredients' || '/main' || '/foods':
       return 'Food';
     case '/explore':
       return 'Explore';
@@ -24,13 +25,13 @@ export default function Header() {
     case '/nationality':
       return 'Explore Nationalities';
     default:
-      return 'Food';
+      return 'Default';
     }
   };
   return (
     <header>
       {
-        pathname !== '/*'
+        pathname !== '/'
         && (
           <div className="header__user">
             <button data-testid="profile-top-btn" type="button">
