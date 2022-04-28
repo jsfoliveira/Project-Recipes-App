@@ -1,30 +1,29 @@
-import React from 'react';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Switch, Route } from 'react-router-dom';
-import Login from './pages/Login';
-import Food from './pages/Food/Food';
-import FoodDetails from './pages/Food/FoodDetails';
-import FoodProgress from './pages/Food/FoodProgress';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import './App.css';
+import Provider from './context/Provider';
+import DoneRecipes from './pages/DoneRecipes';
 import Drink from './pages/Drink/Drink';
 import DrinkDetails from './pages/Drink/DrinkDetails';
 import DrinkProgress from './pages/Drink/DrinkProgess';
+import DrinkIngredients from './pages/Explore/DrinkIngredients';
 import Explore from './pages/Explore/Explore';
-import Profile from './pages/Profile';
-import DoneRecipes from './pages/DoneRecipes';
-import FavoriteRecipes from './pages/FavoriteRecipes';
 import ExploreDrinks from './pages/Explore/ExploreDrinks';
 import ExploreFoods from './pages/Explore/ExploreFoods';
 import FoodIngredients from './pages/Explore/FoodIngredients';
-import DrinkIngredients from './pages/Explore/DrinkIngredients';
 import FoodNationalities from './pages/Explore/FoodNationalities';
-import Header from './components/Header';
-import Provider from './context/Provider';
+import FavoriteRecipes from './pages/FavoriteRecipes';
+import Food from './pages/Food/Food';
+import FoodDetails from './pages/Food/FoodDetails';
+import FoodProgress from './pages/Food/FoodProgress';
+import Login from './pages/Login';
+import Profile from './pages/Profile';
 
 function App() {
   return (
     <Provider>
-      <Header />
+      {/* <Header /> */}
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route path="/foods" component={ Food } />
