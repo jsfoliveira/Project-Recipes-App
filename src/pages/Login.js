@@ -1,5 +1,8 @@
 import React from 'react';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import APIlists from '../redux/action';
 import { getCookListAllCategories, getListAllAlcoholics,
   getListAllCockIngredients, getListAllCooksGlasses } from '../services/fetchCockTails';
 import { firstFoods, getListAllFoodAreas,
@@ -18,8 +21,9 @@ class Login extends React.Component {
   }
 
   async componentDidMount() {
+    const { disp } = this.props;
     const DozenFoods = await firstFoods();
-    const ListAllFoodCategories = getListAllFoodCategories();
+    const ListAllFoodCategories = await getListAllFoodCategories();
     const ListAllFoodAreas = await getListAllFoodAreas();
     const AllFoodIngredients = await getListAllFoodIngredients();
     const ListAllMealCategories = await getListAllMealCategories();
@@ -38,7 +42,7 @@ class Login extends React.Component {
       ListAllCockIngredients,
       ListAllAlcoholics,
     };
-    console.log(objectList);
+    disp(objectList);
   }
 
   validateForm = () => {
@@ -124,4 +128,12 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  disp: propTypes.func,
+}.isRequired;
+
+const mapDispatchToProps = (dispatch) => ({
+  disp: (objectList) => dispatch(APIlists(objectList)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);

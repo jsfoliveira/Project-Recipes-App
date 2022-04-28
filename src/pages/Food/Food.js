@@ -1,10 +1,13 @@
 import React from 'react';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 import FoodCard from '../../components/FoodCard';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import './styles/Food.css';
 
-function Food() {
+function Food({ objectList }) {
+  console.log(objectList);
   return (
     <main>
       <header>
@@ -20,4 +23,12 @@ function Food() {
   );
 }
 
-export default Food;
+Food.propTypes = {
+  objectList: propTypes.object,
+}.isRequired;
+
+const mapStateToProps = (store) => ({
+  objectList: store.API.objectList,
+});
+
+export default connect(mapStateToProps)(Food);

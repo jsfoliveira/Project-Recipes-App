@@ -4,21 +4,12 @@ import './styles/FoodCard.css';
 
 function FoodCard() {
   return (
-    <>
-      <div className="card">
-        <img src={ food } className="card-img-top" alt="card" />
-        <div className="card-body">
-          <p className="card-text">cards content.</p>
-        </div>
+    <div className="card">
+      <img src={ food } className="card-img-top" alt="card" />
+      <div className="card-body">
+        <p className="card-text">cards content.</p>
       </div>
-      <div className="card">
-        <img src={ food } className="card-img-top" alt="card" />
-        <div className="card-body">
-          <p className="card-text">cards content.</p>
-        </div>
-      </div>
-    </>
-
+    </div>
   );
 }
 
