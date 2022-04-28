@@ -1,61 +1,94 @@
 // as três requisições que mais serão usadas:
 export async function getCookListAllCategories() {
-  const URL = fetch('www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
-  const data = (await URL).json();
-  return data;
+  try {
+    const URL = await fetch('www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+    const data = await URL;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function getListAllCooksGlasses() {
-  const URL = fetch('www.thecocktaildb.com/api/json/v1/1/list.php?g=list');
-  const data = (await URL).json();
+  try {
+    const URL = await fetch('www.thecocktaildb.com/api/json/v1/1/list.php?g=list');
+    const data = await URL;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getListAllCockIngredients() {
+  try {
+    const URL = await fetch('www.themealdb.com/api/json/v1/1/list.php?i=list');
+    const data = await URL;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getListAllAlcoholics() {
+  try {
+    const URL = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?a=list');
+    const data = await URL;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Fim das 4 mais importantes;
+
+export async function getCookTailByName(name) {
+  const URL = await fetch(`www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
+  const data = await URL.json();
   return data;
 }
 
-export async function getListAllCooksIngredients() {
-  const URL = fetch('www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
-  const data = (await URL).json();
+export async function getCookIngredientByName(name) {
+  const URL = await fetch(`www.thecocktaildb.com/api/json/v1/1/search.php?i=${name}`);
+  const data = await URL.json();
   return data;
 }
-// Fim das 3 mais importantes;
-
-export async function getByMealName(name) {
-  const URL = fetch(`www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
-  const data = (await URL).json();
-  return data;
-}
-
-export async function getMealByFirstLetter(letter) {
-  const URL = fetch(`www.themealdb.com/api/json/v1/1/search.php?f=${letter}`);
-  const data = (await URL).json();
+export async function getCookTailByFirstLetter(letter) {
+  const URL = await fetch(`www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`);
+  const data = await URL.json();
   return data;
 }
 
-export async function getFullCookDetailsByID(id) {
-  const URL = fetch(`www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-  const data = (await URL).json();
+export async function getFullCookTailDetailsByID(id) {
+  const URL = await fetch(`www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const data = await URL.json();
   return data;
 }
 
-export async function getSingleRandomMeal() {
-  const URL = fetch('www.themealdb.com/api/json/v1/1/random.php');
-  const data = (await URL).json();
+export async function getFullCookIgredientsDetailsByID(id) {
+  const URL = await fetch(`www.thecocktaildb.com/api/json/v1/1/lookup.php?iid=${id}`);
+  const data = await URL.json();
   return data;
 }
 
-export async function getListAllMealCategories() {
-  const URL = fetch('www.themealdb.com/api/json/v1/1/categories.php');
-  const data = (await URL).json();
+export async function getSingleRandomCookTail() {
+  const URL = await fetch('www.thecocktaildb.com/api/json/v1/1/random.php');
+  const data = await URL.json();
   return data;
 }
 
-export async function filterByCategory(food) {
-  const URL = fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=52772${food}`);
-  const data = (await URL).json();
+export async function filterByAlcoholic(drink) {
+  const URL = await fetch(`www.thecocktaildb.com/api/json/v1/1/filter.php?a=${drink}`);
+  const data = await URL.json();
   return data;
 }
 
-export async function filterByArea(food) {
-  const URL = fetch(`www.themealdb.com/api/json/v1/1/filter.php?a=${food}`);
-  const data = (await URL).json();
+export async function filterByCooksCategory(drink) {
+  const URL = await fetch(`www.thecocktaildb.com/api/json/v1/1/filter.php?c=${drink}`);
+  const data = await URL.json();
+  return data;
+}
+
+export async function filterByCooksGlass(drink) {
+  const URL = await fetch(`www.thecocktaildb.com/api/json/v1/1/filter.php?g=${drink}`);
+  const data = await URL.json();
   return data;
 }

@@ -1,61 +1,91 @@
-// as três API's que mais requisições usadas:
-export async function getListAllCategories() {
-  const URL = fetch('www.themealdb.com/api/json/v1/1/list.php?c=list');
-  const data = (await URL).json();
-  return data;
+// as API's que mais necessárias:
+export async function getListAllFoodCategories() {
+  try {
+    const URL = await fetch('www.themealdb.com/api/json/v1/1/list.php?c=list');
+    const data = await URL;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-export async function getListAllAreas() {
-  const URL = fetch('www.themealdb.com/api/json/v1/1/list.php?a=list');
-  const data = (await URL).json();
-  return data;
+export async function getListAllFoodAreas() {
+  try {
+    const URL = await fetch('www.themealdb.com/api/json/v1/1/list.php?a=list');
+    const data = await URL;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-export async function getListAllIngredients() {
-  const URL = fetch('www.themealdb.com/api/json/v1/1/list.php?i=list');
-  const data = (await URL).json();
-  return data;
+export async function getListAllFoodIngredients() {
+  try {
+    const URL = await fetch('www.themealdb.com/api/json/v1/1/list.php?i=list');
+    const data = await URL;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
-// Fim das 3 mais importantes;
+
+export async function getFullMealDetailsByID(id) {
+  try {
+    const URL = await fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+    const data = await URL;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Fim das 4 mais importantes;
 
 export async function getByMealName(name) {
-  const URL = fetch(`www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
-  const data = (await URL).json();
+  const URL = await fetch(`www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
+  const data = await URL.json();
   return data;
 }
 
 export async function getMealByFirstLetter(letter) {
-  const URL = fetch(`www.themealdb.com/api/json/v1/1/search.php?f=${letter}`);
-  const data = (await URL).json();
-  return data;
-}
-
-export async function getFullMealDetailsByID(id) {
-  const URL = fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=52772${id}`);
-  const data = (await URL).json();
+  const URL = await fetch(`www.themealdb.com/api/json/v1/1/search.php?f=${letter}`);
+  const data = await URL.json();
   return data;
 }
 
 export async function getSingleRandomMeal() {
-  const URL = fetch('www.themealdb.com/api/json/v1/1/random.php');
-  const data = (await URL).json();
-  return data;
+  try {
+    const URL = await fetch('www.themealdb.com/api/json/v1/1/random.php');
+    const data = await URL;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function getListAllMealCategories() {
-  const URL = fetch('www.themealdb.com/api/json/v1/1/categories.php');
-  const data = (await URL).json();
+  try {
+    const URL = await fetch('www.themealdb.com/api/json/v1/1/categories.php');
+    const data = await URL;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function filterByFoodCategory(food) {
+  const URL = await fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=${food}`);
+  const data = await URL.json();
   return data;
 }
 
-export async function filterByCategory(food) {
-  const URL = fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=52772${food}`);
-  const data = (await URL).json();
+export async function filterFoodByArea(food) {
+  const URL = await fetch(`www.themealdb.com/api/json/v1/1/filter.php?a=${food}`);
+  const data = await URL.json();
   return data;
 }
 
-export async function filterByArea(food) {
-  const URL = fetch(`www.themealdb.com/api/json/v1/1/filter.php?a=${food}`);
-  const data = (await URL).json();
+export async function firstFoods() {
+  const URL = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const data = await URL.json();
   return data;
 }
