@@ -26,21 +26,25 @@ function App() {
       {/* <Header /> */}
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/foods" component={ Food } />
-        <Route path="/drinks" component={ Drink } />
-        <Route path="/explore" component={ Explore } />
-        <Route path="/profile" component={ Profile } />
-        <Route path="/done-recipes" component={ DoneRecipes } />
-        <Route path="/favorite-recipes" component={ FavoriteRecipes } />
-        <Route path="/foods/:id" component={ FoodDetails } />
-        <Route path="/drinks/:id" component={ DrinkDetails } />
-        <Route path="/foods/:id/in-progress" component={ FoodProgress } />
-        <Route path="/drinks/:id/in-progress" component={ DrinkProgress } />
-        <Route path="/explore/drinks" component={ ExploreDrinks } />
-        <Route path="/explore/foods" component={ ExploreFoods } />
-        <Route path="/explore/foods/ingredients" component={ FoodIngredients } />
-        <Route path="/explore/drinks/ingredients" component={ DrinkIngredients } />
-        <Route path="/explore/foods/nationalities" component={ FoodNationalities } />
+        <Route exact path="/foods" component={ Food } />
+        <Route exact path="/drinks" component={ Drink } />
+        <Route exact path="/explore" component={ Explore } />
+        <Route exact path="/profile" component={ Profile } />
+        <Route exact path="/done-recipes" component={ DoneRecipes } />
+        <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+        <Route exact path="/foods/:id" component={ FoodDetails } />
+        <Route exact path="/drinks/:id" component={ DrinkDetails } />
+        <Route exact path="/foods/:id/in-progress" component={ FoodProgress } />
+        <Route exact path="/drinks/:id/in-progress" component={ DrinkProgress } />
+        <Route exact path="/explore/drinks" component={ ExploreDrinks } />
+        <Route exact path="/explore/foods" component={ ExploreFoods } />
+        <Route exact path="/explore/foods/ingredients" component={ FoodIngredients } />
+        <Route exact path="/explore/drinks/ingredients" component={ DrinkIngredients } />
+        <Route
+          exact
+          path="/explore/foods/nationalities"
+          component={ FoodNationalities }
+        />
       </Switch>
     </Provider>
   );

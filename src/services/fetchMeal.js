@@ -12,7 +12,7 @@ export async function getListAllFoodCategories() {
 export async function getListAllFoodAreas() {
   try {
     const URL = await fetch('www.themealdb.com/api/json/v1/1/list.php?a=list');
-    const data = await URL;
+    const data = await URL.json();
     return data;
   } catch (error) {
     console.log(error);
@@ -85,7 +85,11 @@ export async function filterFoodByArea(food) {
 }
 
 export async function firstFoods() {
-  const URL = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-  const data = await URL.json();
-  return data;
+  try {
+    const URL = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const data = await URL;
+    return data.json();
+  } catch (error) {
+    console.log(error);
+  }
 }

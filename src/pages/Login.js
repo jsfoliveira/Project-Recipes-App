@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCookListAllCategories, getListAllAlcoholics,
   getListAllCockIngredients, getListAllCooksGlasses } from '../services/fetchCockTails';
-import { getListAllFoodAreas, getListAllFoodIngredients,
+import { firstFoods, getListAllFoodAreas,
+  getListAllFoodCategories, getListAllFoodIngredients,
   getListAllMealCategories } from '../services/fetchMeal';
 import './Login.css';
 
@@ -17,6 +18,8 @@ class Login extends React.Component {
   }
 
   async componentDidMount() {
+    const DozenFoods = await firstFoods();
+    const ListAllFoodCategories = getListAllFoodCategories();
     const ListAllFoodAreas = await getListAllFoodAreas();
     const AllFoodIngredients = await getListAllFoodIngredients();
     const ListAllMealCategories = await getListAllMealCategories();
@@ -24,7 +27,9 @@ class Login extends React.Component {
     const ListAllCooksGlasses = await getListAllCooksGlasses();
     const ListAllCockIngredients = await getListAllCockIngredients();
     const ListAllAlcoholics = await getListAllAlcoholics();
-    const objectList = [
+    const objectList = {
+      ListAllFoodCategories,
+      DozenFoods,
       ListAllFoodAreas,
       AllFoodIngredients,
       ListAllMealCategories,
@@ -32,7 +37,7 @@ class Login extends React.Component {
       ListAllCooksGlasses,
       ListAllCockIngredients,
       ListAllAlcoholics,
-    ];
+    };
     console.log(objectList);
   }
 
