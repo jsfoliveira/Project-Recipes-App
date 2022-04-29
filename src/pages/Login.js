@@ -1,5 +1,13 @@
 import React from 'react';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import APIlists from '../redux/action';
+import { getCookListAllCategories, getListAllAlcoholics,
+  getListAllCockIngredients, getListAllCooksGlasses } from '../services/fetchCockTails';
+import { firstFoods, getListAllFoodAreas,
+  getListAllFoodCategories, getListAllFoodIngredients,
+  getListAllMealCategories } from '../services/fetchMeal';
 import './Login.css';
 
 class Login extends React.Component {
@@ -10,6 +18,31 @@ class Login extends React.Component {
       passwordInput: '',
       isButtonDisabled: true,
     };
+  }
+
+  async componentDidMount() {
+    const { disp } = this.props;
+    const DozenFoods = await firstFoods();
+    const ListAllFoodCategories = await getListAllFoodCategories();
+    const ListAllFoodAreas = await getListAllFoodAreas();
+    const AllFoodIngredients = await getListAllFoodIngredients();
+    const ListAllMealCategories = await getListAllMealCategories();
+    const CookListAllCategories = await getCookListAllCategories();
+    const ListAllCooksGlasses = await getListAllCooksGlasses();
+    const ListAllCockIngredients = await getListAllCockIngredients();
+    const ListAllAlcoholics = await getListAllAlcoholics();
+    const objectList = {
+      ListAllFoodCategories,
+      DozenFoods,
+      ListAllFoodAreas,
+      AllFoodIngredients,
+      ListAllMealCategories,
+      CookListAllCategories,
+      ListAllCooksGlasses,
+      ListAllCockIngredients,
+      ListAllAlcoholics,
+    };
+    disp(objectList);
   }
 
   validateForm = () => {
@@ -95,4 +128,12 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  disp: propTypes.func,
+}.isRequired;
+
+const mapDispatchToProps = (dispatch) => ({
+  disp: (objectList) => dispatch(APIlists(objectList)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
