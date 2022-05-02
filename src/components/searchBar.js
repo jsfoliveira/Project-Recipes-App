@@ -22,11 +22,10 @@ function SearchBar({ type }) {
     if (result === undefined) {
       return null;
     }
-    console.log(result);
-    if (result.length !== 1 && type === 'foods') {
+    if (result.length === 1 && type === 'foods') {
       history.push(`/${type}/${result[0].idMeal}`);
     }
-    if (result.length !== 1 && type === 'drinks') {
+    if (result.length === 1 && type === 'drinks') {
       history.push(`/${type}/${result[0].idDrink}`);
     }
     if (result.length > 1 && type === 'foods') {
@@ -48,7 +47,6 @@ function SearchBar({ type }) {
     }
     if (valueRadioSearchBar === 'nome') {
       resultRequest = await requestName(valueInputSearchBar, type);
-      console.log(resultRequest);
     }
     if (valueRadioSearchBar === 'primeira letra') {
       if (valueInputSearchBar.length > 1) {
