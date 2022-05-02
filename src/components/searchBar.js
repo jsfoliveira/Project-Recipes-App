@@ -57,8 +57,7 @@ function SearchBar({ type }) {
     // console.log(resultRequest);
     if (!resultRequest) {
       return customAlert(
-        // eslint-disable-next-line quotes
-        "Sorry, we haven't found any recipes for these filters.",
+        'Sorry, we haven\'t found any recipes for these filters.',
       );
     }
     await showSearchRequestResult(resultRequest);
