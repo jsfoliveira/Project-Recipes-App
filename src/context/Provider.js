@@ -5,10 +5,16 @@ import myContext from './myContext';
 function Provider(props) {
   const [headerText, setHeaderText] = useState('');
   const [path, setPath] = useState('');
+  const [recipes, setRecipes] = useState([]);
+  const [searchBar, setSearchBar] = useState(false);
   const { children } = props;
   const contextValue = {
     headerText,
     path,
+    searchBar,
+    recipes,
+    setRecipes,
+    setSearchBar,
     setPath,
     setHeaderText,
   };
