@@ -1,5 +1,6 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import myContext from '../context/myContext';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import './styles/Header.css';
@@ -22,27 +23,32 @@ const titles = {
   '/nationality': 'Explore Nationalities',
 };
 
-const renderSearch = (path) => {
-  if (path === '/foods' || path === '/nationality' || path === '/drinks'
-  || path === '/explore/foods/nationalities') {
-    return (
-      <button type="button">
-        <img data-testid="search-top-btn" alt="profileIcon" src={ searchIcon } />
-      </button>
-    );
-  }
-};
-
 export default function Header() {
-  // const { headerText, setHeaderText, path, setPath } = useContext(myContext);
+  const { searchBar, setSearchBar } = useContext(myContext);
   const history = useHistory();
   const { location: { pathname } } = history;
+
+  const renderSearch = (path) => {
+    if (path === '/foods' || path === '/nationality' || path === '/drinks'
+    || path === '/explore/foods/nationalities') {
+      return (
+        <button
+          onClick={ () => setSearchBar(!searchBar) }
+          type="button"
+        >
+          <img data-testid="search-top-btn" alt="profileIcon" src={ searchIcon } />
+        </button>
+      );
+    }
+  };
   return (
     <header>
       <div className="header__user">
-        <button type="button">
-          <img data-testid="profile-top-btn" alt="profileIcon" src={ profileIcon } />
-        </button>
+        <Link to="/profile">
+          <button type="button">
+            <img data-testid="profile-top-btn" alt="profileIcon" src={ profileIcon } />
+          </button>
+        </Link>
         <h1 data-testid="page-title">{ titles[pathname] }</h1>
         { renderSearch(pathname)}
       </div>

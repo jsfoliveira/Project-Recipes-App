@@ -1,20 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FoodCard from '../../components/FoodCard';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import './styles/Food.css';
+import SearchBar from '../../components/searchBar';
+import myContext from '../../context/myContext';
 
-function Food({ objectList }) {
-  console.log(objectList);
+function Food() {
+  const { recipes } = useContext(myContext);
+  const fckLint = 12;
   return (
     <main>
       <header>
         <Header />
+        <SearchBar type="foods" />
       </header>
       <div className="food-container">
-        <FoodCard />
+        {recipes && recipes.length > 1
+        && recipes.map((element, i) => {
+          const { strMealThumb, strMeal } = element;
+          return (i < fckLint
+        && <FoodCard
+          key={ i }
+          index={ i }
+          food={ strMealThumb }
+          name={ strMeal }
+        />);
+        }) }
 
       </div>
       <Footer />

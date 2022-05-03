@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -11,9 +11,10 @@ function Profile() {
   useEffect(() => {
     const emailLocalStorage = () => {
       const userObjeto = JSON.parse(localStorage.getItem('user'));
-      console.log(userObjeto);
-      const dataEmail = userObjeto.email;
-      setLoginEmail(dataEmail);
+      if (userObjeto) {
+        const dataEmail = userObjeto.email;
+        setLoginEmail(dataEmail);
+      }
     };
     emailLocalStorage();
   }, []);

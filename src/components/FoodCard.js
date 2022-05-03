@@ -1,16 +1,28 @@
 import React from 'react';
-import food from '../assets/login.jpg';
+import propTypes from 'prop-types';
 import './styles/FoodCard.css';
 
-function FoodCard() {
+function FoodCard(props) {
+  const { food, name, index } = props;
   return (
-    <div className="card">
-      <img src={ food } className="card-img-top" alt="card" />
+    <div data-testid={ `${index}-recipe-card` } className="card">
+      <img
+        data-testid={ `${index}-card-img` }
+        src={ food }
+        className="card-img-top"
+        alt="card"
+      />
       <div className="card-body">
-        <p className="card-text">cards content.</p>
+        <p data-testid={ `${index}-card-name` } className="card-text">{ name }</p>
       </div>
     </div>
   );
 }
+
+FoodCard.propTypes = {
+  food: propTypes.string,
+  name: propTypes.string,
+  index: propTypes.string,
+}.isRequired;
 
 export default FoodCard;
