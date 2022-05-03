@@ -13,13 +13,10 @@ function SearchBar({ type }) {
   const { setRecipes, searchBar } = useContext(myContext);
   const customAlert = window.alert;
 
-  const valueName = ({ target }) => {
-    setValueInputSearchBar(target.value);
-  };
   // fazer o redireionamento
   const history = useHistory();
   const showSearchRequestResult = (result) => {
-    if (result === undefined) {
+    if (result.length === undefined) {
       return null;
     }
     if (result.length === 1 && type === 'foods') {
@@ -37,13 +34,12 @@ function SearchBar({ type }) {
   };
 
   const handleSearchBar = async () => {
-    if (!valueInputSearchBar) {
+    if (valueInputSearchBar.length === undefined) {
       return null;
     }
     let resultRequest;
     if (valueRadioSearchBar === 'ingrediente') {
       resultRequest = await requestIngredient(valueInputSearchBar, type);
-      // console.log(resultRequest);
     }
     if (valueRadioSearchBar === 'nome') {
       resultRequest = await requestName(valueInputSearchBar, type);
@@ -54,7 +50,6 @@ function SearchBar({ type }) {
       }
       resultRequest = await requestLetra(valueInputSearchBar, type);
     }
-    // console.log(resultRequest);
     if (!resultRequest) {
       return customAlert(
         'Sorry, we haven\'t found any recipes for these filters.',
@@ -71,7 +66,7 @@ function SearchBar({ type }) {
             <input
               type="text"
               data-testid="search-input"
-              onChange={ valueName }
+              onChange={ (event) => setValueInputSearchBar(event.target.value) }
               id="valueName"
             />
           </label>
