@@ -13,7 +13,6 @@ function SearchBar({ type }) {
   const { setRecipes, searchBar } = useContext(myContext);
   const customAlert = window.alert;
 
-  // fazer o redireionamento
   const history = useHistory();
   const showSearchRequestResult = (result) => {
     if (result.length === undefined) {
