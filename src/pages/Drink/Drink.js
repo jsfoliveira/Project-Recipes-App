@@ -1,31 +1,49 @@
-import React, { useContext } from 'react';
-import FoodCard from '../../components/FoodCard';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect } from 'react';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
-import SearchBar from '../../components/searchBar';
+import DrinkButtons from '../../components/DrinkButtons';
+import CardDrink from '../../components/CardDrink';
 import myContext from '../../context/myContext';
+import fetchDrinks from '../../services/fetchDrinks';
+import SearchBar from '../../components/searchBar';
 
 function Drink() {
-  const { recipes } = useContext(myContext);
-  console.log(recipes);
-  const fckLint = 12;
+  const { drinks, setDrinks } = useContext(myContext);
+
+  useEffect(() => {
+    const getFetch = async () => {
+      const data = await fetchDrinks();
+      setDrinks(data.drinks);
+    };
+    getFetch();
+  }, []);
+
+  const max = 12;
+
   return (
-    <>
+    <main>
       <Header />
       <SearchBar type="drinks" />
-      {recipes && recipes.length > 1
-        && recipes.map((element, i) => {
-          const { strDrinkThumb, strDrink } = element;
-          return (i < fckLint
-        && <FoodCard
-          key={ i }
-          index={ i }
-          food={ strDrinkThumb }
-          name={ strDrink }
-        />);
+      <DrinkButtons />
+      <div>
+        { drinks.map((element, i) => {
+          if (i < max) {
+            return (
+              <CardDrink
+                key={ i }
+                index={ i }
+                strDrinkThumb={ element.strDrinkThumb }
+                strDrink={ element.strDrink }
+                id={ element.idDrink }
+              />
+            );
+          }
+          return null;
         })}
+      </div>
       <Footer />
-    </>
+    </main>
 
   );
 }
