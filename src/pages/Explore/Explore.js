@@ -12,7 +12,7 @@ function Explore() {
           <button
             id="food"
             type="submit"
-            data-testid="explore-food"
+            data-testid="explore-foods"
           >
             Explore Foods
           </button>
