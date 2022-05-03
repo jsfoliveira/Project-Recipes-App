@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import myContext from './myContext';
 
 function Provider(props) {
+  // FoodPage Context
+  const [foods, setFoods] = useState([]);
+  const [drinks, setDrinks] = useState([]);
+  // Buttons for Foods and Drinks
+  const [buttons, setButtons] = useState([]);
   const [headerText, setHeaderText] = useState('');
   const [path, setPath] = useState('');
   const [recipes, setRecipes] = useState([]);
@@ -17,6 +22,12 @@ function Provider(props) {
     setSearchBar,
     setPath,
     setHeaderText,
+    foods,
+    setFoods,
+    drinks,
+    setDrinks,
+    buttons,
+    setButtons,
   };
   return (
     <div>

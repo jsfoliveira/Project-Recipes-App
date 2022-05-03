@@ -10,7 +10,7 @@ import myContext from '../context/myContext';
 function SearchBar({ type }) {
   const [valueRadioSearchBar, setValueRadioSearchBar] = useState('');
   const [valueInputSearchBar, setValueInputSearchBar] = useState('');
-  const { setRecipes, searchBar } = useContext(myContext);
+  const { setFoods, searchBar, setDrinks } = useContext(myContext);
   const customAlert = window.alert;
 
   const history = useHistory();
@@ -25,10 +25,10 @@ function SearchBar({ type }) {
       history.push(`/${type}/${result[0].idDrink}`);
     }
     if (result.length > 1 && type === 'foods') {
-      setRecipes(result);
+      setFoods(result);
     }
     if (result.length > 1 && type === 'drinks') {
-      setRecipes(result);
+      setDrinks(result);
     }
   };
 

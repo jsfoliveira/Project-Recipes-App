@@ -73,15 +73,24 @@ export async function getListAllMealCategories() {
 }
 
 export async function filterByFoodCategory(food) {
-  const URL = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${food}`);
-  const data = await URL.json();
-  return data;
+  try {
+    const URL = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${food}`);
+    const data = await URL.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function filterFoodByArea(food) {
-  const URL = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${food}`);
-  const data = await URL.json();
-  return data;
+  try {
+    const URL = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${food}`);
+    const data = await URL.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function firstFoods() {
