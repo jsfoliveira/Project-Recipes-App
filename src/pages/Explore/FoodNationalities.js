@@ -10,7 +10,7 @@ import Header from '../../components/Header';
 import './styles/Nationalities.css';
 
 function FoodNationalities() {
-  const [country, setCountry] = useState('American');
+  const [country, setCountry] = useState('All');
   const [optionsCountry, setOptionCountry] = useState([]);
   const [foodCountry, setFoodCountry] = useState([]);
   const maxRecipe = 12;
@@ -53,9 +53,15 @@ function FoodNationalities() {
           onChange={ (event) => setCountry(event.target.value) }
           data-testid="explore-by-nationality-dropdown"
         >
-          <option data-testid="All-option">All</option>
-          {optionsCountry.map((element) => (
+          <option
+            value="All"
+            data-testid="All-option"
+          >
+            All
+          </option>
+          {optionsCountry.length && optionsCountry.map((element) => (
             <option
+              value={ element.strArea }
               key={ element.strArea }
               data-testid={ `${element.strArea}-option` }
             >
@@ -63,7 +69,7 @@ function FoodNationalities() {
             </option>
           ))}
         </select>
-        {foodCountry.slice(0, maxRecipe)
+        {foodCountry.length && foodCountry.slice(0, maxRecipe)
           .map((element, index) => (
             <FilterNationalities
               key={ element.strMeal }

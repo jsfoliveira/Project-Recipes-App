@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const FilterNationalities = ({ index, name, image, id }) => (
   <Link to={ `/foods/${id}` }>
-    <div data-testid={ `${index}-ingredient-card` }>
+    <div data-testid={ `${index}-recipe-card` }>
       <img
         src={ image }
         alt={ name }

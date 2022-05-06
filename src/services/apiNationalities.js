@@ -1,8 +1,8 @@
 // todas as receitas
 export const fetchAllMeals = async () => {
   const endpoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-  const results = fetch(endpoint);
-  const response = results.json();
+  const results = await fetch(endpoint);
+  const response = await results.json();
   return response;
 };
 
