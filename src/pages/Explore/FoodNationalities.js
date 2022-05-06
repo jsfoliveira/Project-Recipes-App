@@ -18,7 +18,6 @@ function FoodNationalities() {
   const allArea = async () => {
     const response = await fetchAllArea();
     setOptionCountry(response.meals);
-    console.log(response.meals);
   };
 
   useEffect(() => {
