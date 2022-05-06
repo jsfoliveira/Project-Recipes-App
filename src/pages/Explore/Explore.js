@@ -12,7 +12,7 @@ function Explore() {
         <Link to="/explore/foods">
           <button
             id="food"
-            type="button"
+            type="submit"
             data-testid="explore-foods"
           >
             Explore Foods
