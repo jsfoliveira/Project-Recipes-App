@@ -14,7 +14,7 @@ function FoodButtons() {
     };
     getButtons();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setButtons]);
 
   const All = async () => {
     const data = await fetchFoods();

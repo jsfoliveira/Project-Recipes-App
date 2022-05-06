@@ -17,7 +17,7 @@ function Drink() {
       setDrinks(data.drinks);
     };
     getFetch();
-  }, []);
+  }, [setDrinks]);
 
   const max = 12;
 
