@@ -43,6 +43,7 @@ class Login extends React.Component {
       ListAllAlcoholics,
     };
     disp(objectList);
+    console.log(objectList);
   }
 
   validateForm = () => {
