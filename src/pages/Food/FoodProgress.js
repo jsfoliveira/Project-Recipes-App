@@ -10,6 +10,8 @@ import BlackHeart from '../../images/blackHeartIcon.svg';
 import Share from '../../images/shareIcon.svg';
 import WhiteHeart from '../../images/whiteHeartIcon.svg';
 import renderIngredients from '../../services/renderIngredients';
+import testMeal from '../../services/testMeal';
+import './styles/FoodProgress.css';
 
 const copy = require('clipboard-copy');
 
