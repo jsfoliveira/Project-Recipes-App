@@ -12,6 +12,7 @@ function Provider(props) {
   const [path, setPath] = useState('');
   const [recipes, setRecipes] = useState([]);
   const [searchBar, setSearchBar] = useState(false);
+  const [redirect, setRedirect] = useState(false);
   const [foodCountry, setFoodCountry] = useState([]);
   const { children } = props;
   const contextValue = {
@@ -29,6 +30,8 @@ function Provider(props) {
     setDrinks,
     buttons,
     setButtons,
+    redirect,
+    setRedirect,
     foodCountry,
     setFoodCountry,
   };
