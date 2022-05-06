@@ -92,3 +92,13 @@ export async function filterByCooksGlass(drink) {
   const data = await URL.json();
   return data;
 }
+
+export async function getListOfRecomendations() {
+  try {
+    const URL = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const data = await URL.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}

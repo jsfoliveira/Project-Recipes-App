@@ -1,0 +1,22 @@
+.image-recipe {
+  width: 30%;
+}
+
+.carrossel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 420px;
+}
+
+.carrossel .card {
+  width: 200px;
+}
+
+.start-button {
+  background-color: white;
+  bottom: 0;
+  position: fixed;
+  right: 50%;
+  width: 200px;
+}
