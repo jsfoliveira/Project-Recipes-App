@@ -3,6 +3,7 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import IngredientFoodCard from '../../components/IngredientFoodCard';
 import { getListAllFoodIngredients } from '../../services/fetchMeal';
+import './FoodIngredients.css';
 
 function FoodIngredients() {
   const [ingredients, setIngredients] = useState([]);
@@ -20,18 +21,20 @@ function FoodIngredients() {
   return (
     <div>
       <Header />
-      { ingredients.map((element, index) => {
-        if (index < max) {
-          return (
-            <IngredientFoodCard
-              key={ index }
-              index={ index }
-              name={ element.strIngredient }
-            />
-          );
-        }
-        return null;
-      })}
+      <div className="FoodIngredient">
+        { ingredients.map((element, index) => {
+          if (index < max) {
+            return (
+              <IngredientFoodCard
+                key={ index }
+                index={ index }
+                ingredient={ element.strIngredient }
+              />
+            );
+          }
+          return null;
+        })}
+      </div>
       <Footer />
     </div>
   );

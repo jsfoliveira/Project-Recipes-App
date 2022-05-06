@@ -9,12 +9,14 @@ import fetchDrinks from '../../services/fetchDrinks';
 import SearchBar from '../../components/searchBar';
 
 function Drink() {
-  const { drinks, setDrinks } = useContext(myContext);
+  const { drinks, setDrinks, redirect } = useContext(myContext);
 
   useEffect(() => {
     const getFetch = async () => {
       const data = await fetchDrinks();
-      setDrinks(data.drinks);
+      if (!redirect) {
+        setDrinks(data.drinks);
+      }
     };
     getFetch();
   }, []);

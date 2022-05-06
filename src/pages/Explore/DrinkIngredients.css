@@ -1,0 +1,5 @@
+.DrinkIngredient {
+  display: flex;
+  flex-direction: row;
+  padding-top: 200px;
+}

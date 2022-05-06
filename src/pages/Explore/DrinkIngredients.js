@@ -3,6 +3,7 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import IngredientDrinkCard from '../../components/IngredientDrinkCard';
 import { getListAllCockIngredients } from '../../services/fetchCockTails';
+import './DrinkIngredients.css';
 
 function DrinkIngredients() {
   const [ingredients, setIngredients] = useState([]);
@@ -11,7 +12,6 @@ function DrinkIngredients() {
     const getIngredients = async () => {
       const data = await getListAllCockIngredients();
       setIngredients(data.drinks);
-      console.log(ingredients);
     };
     getIngredients();
   }, []);
@@ -26,7 +26,7 @@ function DrinkIngredients() {
             <IngredientDrinkCard
               key={ index }
               index={ index }
-              name={ element.strIngredient1 }
+              ingredient={ element.strIngredient1 }
             />
           );
         }
