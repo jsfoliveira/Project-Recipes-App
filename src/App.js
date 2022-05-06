@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
+import NotFound from './components/NotFound';
 import Provider from './context/Provider';
 import DoneRecipes from './pages/DoneRecipes';
 import Drink from './pages/Drink/Drink';
@@ -44,6 +45,11 @@ function App() {
           exact
           path="/explore/foods/nationalities"
           component={ FoodNationalities }
+        />
+        <Route
+          exact
+          path="*"
+          component={ NotFound }
         />
       </Switch>
     </Provider>

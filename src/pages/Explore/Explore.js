@@ -2,17 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import './styles/Explore.css';
 
 function Explore() {
   return (
     <div>
       <Header />
-      <div>
+      <div className="explore-container">
         <Link to="/explore/foods">
           <button
             id="food"
-            type="submit"
-            data-testid="explore-food"
+            type="button"
+            data-testid="explore-foods"
           >
             Explore Foods
           </button>
