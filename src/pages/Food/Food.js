@@ -21,8 +21,7 @@ function Food() {
       }
     };
     getFetch();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setFoods]);
   return (
     <main>
       <header>

@@ -19,7 +19,7 @@ function Drink() {
       }
     };
     getFetch();
-  }, []);
+  }, [setDrinks]);
 
   const max = 12;
 
