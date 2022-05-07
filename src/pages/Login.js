@@ -1,16 +1,15 @@
-/* eslint-disable comma-dangle */
 import propTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import APIlists from '../redux/action';
 import {
   getCookListAllCategories, getListAllAlcoholics,
-  getListAllCockIngredients, getListAllCooksGlasses
+  getListAllCockIngredients, getListAllCooksGlasses,
 } from '../services/fetchCockTails';
 import {
   firstFoods, getListAllFoodAreas,
   getListAllFoodCategories, getListAllFoodIngredients,
-  getListAllMealCategories
+  getListAllMealCategories,
 } from '../services/fetchMeal';
 import './Login.css';
 
