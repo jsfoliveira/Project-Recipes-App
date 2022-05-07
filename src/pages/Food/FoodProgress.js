@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { PropTypes } from 'prop-types';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -62,7 +63,6 @@ function FoodProgress({ match }) {
   }, [ingredients]);
 
   useEffect(() => {
-    console.log(favoriteRecipe);
     sendToFavoriteRecipes(favoriteRecipe);
   }, [favoriteRecipe]);
 

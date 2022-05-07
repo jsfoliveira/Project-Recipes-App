@@ -6,7 +6,6 @@ function useFavorite() {
   const handleFavorite = ({ target }) => {
     const { checked, value } = target;
     const { name } = JSON.parse(value);
-    console.log(value, checked);
     setFavoriteRecipe(() => (
       checked
         ? [...favoriteRecipe, JSON.parse(value)]

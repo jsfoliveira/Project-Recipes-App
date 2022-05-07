@@ -20,3 +20,7 @@
   right: 50%;
   width: 200px;
 }
+
+.favorite-button {
+  display: none;
+}

@@ -1,0 +1,20 @@
+.food-image {
+  height: 200px;
+  width: 100%;
+}
+
+.food-title {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.food-title button {
+  background-color: transparent;
+  border: none;
+}
+
+.ingredient-list {
+  display: flex;
+  flex-direction: column;
+}

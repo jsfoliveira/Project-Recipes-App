@@ -43,6 +43,7 @@ function useLocalStorage() {
 
   useEffect(() => {
     sendToInProgress();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inProgress, setInProgress]);
 
   return { sendToInProgress, inProgress, sendToFavoriteRecipes, favorite };

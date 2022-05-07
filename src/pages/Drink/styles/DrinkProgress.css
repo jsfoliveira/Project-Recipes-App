@@ -1,0 +1,15 @@
+.drink-image {
+  height: 200px;
+  width: 100%;
+}
+
+.drink-title {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.drink-title button {
+  background-color: transparent;
+  border: none;
+}
