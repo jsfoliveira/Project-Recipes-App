@@ -1,13 +1,17 @@
-import React from 'react';
+/* eslint-disable comma-dangle */
 import propTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import APIlists from '../redux/action';
-import { getCookListAllCategories, getListAllAlcoholics,
-  getListAllCockIngredients, getListAllCooksGlasses } from '../services/fetchCockTails';
-import { firstFoods, getListAllFoodAreas,
+import {
+  getCookListAllCategories, getListAllAlcoholics,
+  getListAllCockIngredients, getListAllCooksGlasses
+} from '../services/fetchCockTails';
+import {
+  firstFoods, getListAllFoodAreas,
   getListAllFoodCategories, getListAllFoodIngredients,
-  getListAllMealCategories } from '../services/fetchMeal';
+  getListAllMealCategories
+} from '../services/fetchMeal';
 import './Login.css';
 
 class Login extends React.Component {
@@ -51,7 +55,8 @@ class Login extends React.Component {
     const email = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     const numberMin = 6;
     const passwordValidation = passwordInput.length > numberMin;
-    const emailValidation = emailInput.match(email);
+    const emailValidation = email.test(emailInput);
+
     if (emailValidation && passwordValidation) {
       this.setState({
         isButtonDisabled: false,
@@ -61,9 +66,9 @@ class Login extends React.Component {
         isButtonDisabled: true,
       });
     }
-    localStorage.setItem('mealsToken', JSON.stringify(1));
-    localStorage.setItem('cocktailsToken', JSON.stringify(1));
-    localStorage.setItem('user', JSON.stringify({ email: emailInput }));
+    // localStorage.setItem('mealsToken', JSON.stringify(1));
+    // localStorage.setItem('cocktailsToken', JSON.stringify(1));
+    // localStorage.setItem('user', JSON.stringify({ email: emailInput }));
   }
 
   handleChange = (event) => {
@@ -75,6 +80,7 @@ class Login extends React.Component {
 
   render() {
     const { emailInput, passwordInput, isButtonDisabled } = this.state;
+    const { history } = this.props;
     return (
       <div className="login d-flex justify-content-center align-items-center">
         <form className="form-login">
@@ -113,16 +119,22 @@ class Login extends React.Component {
               />
             </label>
           </div>
-          <Link to="/foods">
-            <button
-              type="submit"
-              className="btn btn-primary d-flex justify-content-center align-items-center"
-              data-testid="login-submit-btn"
-              disabled={ isButtonDisabled }
-            >
-              Enter
-            </button>
-          </Link>
+
+          <button
+            type="submit"
+            className="btn btn-primary d-flex justify-content-center align-items-center"
+            data-testid="login-submit-btn"
+            disabled={ isButtonDisabled }
+            onClick={ () => {
+              localStorage.setItem('mealsToken', JSON.stringify(1));
+              localStorage.setItem('cocktailsToken', JSON.stringify(1));
+              localStorage.setItem('user', JSON.stringify({ email: emailInput }));
+              history.push('/foods');
+            } }
+          >
+            Enter
+          </button>
+
         </form>
       </div>
     );
