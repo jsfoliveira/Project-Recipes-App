@@ -11,18 +11,16 @@ import myContext from '../../context/myContext';
 import fetchFoods from '../../services/fetchFoods';
 
 function Food() {
-  const { foods, setFoods, redirect } = useContext(myContext);
-  const fckLint = 12;
-  
+  const { foods, setFoods } = useContext(myContext);
+  const fckLnt = 12;
   useEffect(() => {
     const getFetch = async () => {
       const data = await fetchFoods();
-      if (!redirect) {
-        setFoods(data.meals);
-      }
+      setFoods(data.meals);
     };
     getFetch();
-  }, [setFoods]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <main>
       <header>
