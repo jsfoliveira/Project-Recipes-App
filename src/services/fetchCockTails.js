@@ -21,7 +21,7 @@ export async function getListAllCooksGlasses() {
 
 export async function getListAllCockIngredients() {
   try {
-    const URL = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
+    const URL = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
     const data = await URL.json();
     return data;
   } catch (error) {

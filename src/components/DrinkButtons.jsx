@@ -15,7 +15,7 @@ function DrinkButtons() {
       setButtons(resp.drinks);
     };
     getButtons();
-  }, []);
+  }, [setButtons]);
 
   const All = async () => {
     const data = await fetchDrinks();
