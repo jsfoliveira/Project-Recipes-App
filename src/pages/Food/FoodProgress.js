@@ -41,7 +41,7 @@ function FoodProgress({ match }) {
     const browserStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (browserStorage) {
       const { meals } = browserStorage;
-      if (Object.keys(meals).length > 0) {
+      if (Object.keys(meals).some((el) => el === params.id)) {
         setIngredients([...meals[params.id]]);
       }
     }
@@ -68,7 +68,7 @@ function FoodProgress({ match }) {
 
   const isChecked = (ingredient) => {
     const { meals } = inProgress;
-    if (Object.keys(meals).length > 0) {
+    if (Object.keys(meals).some((el) => el === params.id)) {
       return meals[params.id].some((el) => el === ingredient);
     }
     return false;

@@ -23,7 +23,7 @@ const { idDrink: id, strArea: nationality, strCategory: category,
 const favoriteObj = {
   id,
   nationality,
-  type: 'food',
+  type: 'cocktails',
   category,
   alcoholicOrNot,
   name,
@@ -77,6 +77,7 @@ function FoodProgress({ match }) {
 
   const isFavorite = (favorite) => {
     const browserFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    console.log(browserFavorite);
     if (browserFavorite && Object.keys(browserFavorite).length > 0) {
       const recipeName = browserFavorite
         .find((recipe) => recipe.name === testDrink[0].strDrink);

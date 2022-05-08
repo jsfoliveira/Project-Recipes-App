@@ -1,78 +1,85 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import CardDrink from '../../components/CardDrink';
+import { Link, useParams } from 'react-router-dom';
 import useFavorite from '../../context/hooks/useFavorite';
-import { getListOfRecomendations } from '../../services/fetchCockTails';
-import { getFullMealDetailsByID } from '../../services/fetchMeal';
 import '../styles/Details.css';
 import BlackHeart from '../../images/blackHeartIcon.svg';
 import WhiteHeart from '../../images/whiteHeartIcon.svg';
+import Share from '../../images/shareIcon.svg';
+import useLocalStorage from '../../context/hooks/useLocalStorage';
+import Alert from '../../components/Alert';
+import useTimeOut from '../../context/hooks/useTimeOut';
+import { fetchIDMeals } from '../componentsDetails/fetchID';
+import DrinksRecomedations from '../componentsDetails/RecomedationDrinksDetails';
+
+const copy = require('clipboard-copy');
 
 function FoodDetails() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
-  const [recomendation, setRecomendation] = useState([]);
   const [favoriteObj, setFavoriteObj] = useState({});
   const [loading1, setLoading1] = useState(true);
-  const [loading2, setLoading2] = useState(true);
   const [loading3, setLoading3] = useState(true);
+  const [isChecked, setChecked] = useState(false);
+  const [recipeButton, setRecipeButton] = useState('');
+  const { show, timeOut } = useTimeOut();
   const { favoriteRecipe, /* setFavoriteRecipe, */ handleFavorite } = useFavorite();
+  const { /* inProgress, sendToInProgress, */ sendToFavoriteRecipes } = useLocalStorage();
+
+  const isFavorite = async (favorite) => {
+    const browserFavorite = await JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (browserFavorite && Object.keys(browserFavorite).length > 0) {
+      const recipeName = browserFavorite
+        .some((recip) => recip.name === favorite);
+      return setChecked(recipeName);
+    }
+  };
 
   const fetchID = async () => {
     setLoading1(true);
-    /* [/strIngredient/i] */
-    const data = await getFullMealDetailsByID(id);
-    setRecipe(data.meals);
-    const renderIngredients = () => {
-      data.meals.map((food) => {
-        const keys = Object.keys(food).filter((obj) => obj.includes('strIngredient'));
-        return setIngredients(keys.map((key) => food[key]));
-      });
-      data.meals.map((food) => {
-        const keys = Object.keys(food).filter((obj) => obj.includes('strMeasure'));
-        return setMeasures(keys.map((key) => food[key]));
-      });
-    };
-    const setFavorite = () => {
-      const { strArea: nationality, strCategory: category,
-        strMeal: name, strMealThumb: image } = data.meals[0];
-      setFavoriteObj({
-        id,
-        nationality,
-        type: 'food',
-        category,
-        alcoholicOrNot: '',
-        name,
-        image,
-      });
-    };
-    renderIngredients();
-    setFavorite();
+    await fetchIDMeals({ id,
+      setRecipe,
+      isFavorite,
+      setIngredients,
+      setMeasures,
+      setFavoriteObj });
     setLoading1(false);
   };
 
-  const fetchRecomedation = async () => {
-    setLoading2(true);
-    /* [/strIngredient/i] */
-    const data = await getListOfRecomendations();
-    const { drinks } = await data;
-    await setRecomendation(drinks);
-    setLoading2(false);
+  const isInProgress = () => {
+    const browserProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const idStorage = Object.keys(browserProgress.meals);
+    if (idStorage && idStorage.some((idê) => idê === id)) {
+      setRecipeButton('Continue Recipe');
+    } else {
+      setRecipeButton('Start Recipe');
+    }
   };
 
   useEffect(() => {
     setLoading3(true);
     fetchID();
-    fetchRecomedation();
+    isInProgress();
     setLoading3(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const max = 6;
+
+  useEffect(() => {
+    if (!loading1 && !loading3) {
+      sendToFavoriteRecipes(favoriteRecipe);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [favoriteRecipe]);
+
+  const handleHandleFavorite = ({ target }) => {
+    setChecked(!isChecked);
+    handleFavorite({ target });
+  };
+
   return (
     <div className="FoodDetails">
-      {!loading1 && !loading2 && !loading3
+      {!loading1 && !loading3
       && (
         <>
           <img
@@ -81,20 +88,29 @@ function FoodDetails() {
             alt={ recipe[0].strMeal }
             data-testid="recipe-photo"
           />
+          {show && <Alert />}
           <h1 data-testid="recipe-title">{ recipe[0].strMeal }</h1>
-          <button type="button" data-testid="share-btn">Share</button>
+          <button
+            data-testid="share-btn"
+            type="button"
+            onClick={ () => {
+              copy(`http://localhost:3000/foods/${id}`); timeOut();
+            } }
+          >
+            <img src={ Share } alt="compartilhar" />
+          </button>
           <label htmlFor="favorite">
             <input
               className="favorite-button"
-              onClick={ ({ target }) => handleFavorite({ target }) }
+              onClick={ ({ target }) => handleHandleFavorite({ target }) }
               type="checkbox"
-              /* defaultChecked={ isFavorite(testMeal[0].strMeal) } */
+              defaultChecked={ isChecked }
               value={ JSON.stringify(favoriteObj) }
               id="favorite"
             />
             <img
               data-testid="favorite-btn"
-              src={ favoriteRecipe.length > 0 ? BlackHeart : WhiteHeart }
+              src={ isChecked ? BlackHeart : WhiteHeart }
               alt="favoritar"
             />
           </label>
@@ -112,39 +128,22 @@ function FoodDetails() {
               ))}
           </ul>
           <p data-testid="instructions">{ recipe[0].strInstructions }</p>
-          {/* <iframe
+          <iframe
             title="Videeo"
             data-testid="video"
             allow="fullscreen"
             src={ recipe[0].strYoutube }
-          /> */}
-          <ul className="carrossel">
-            {recomendation.length
-          && recomendation.map((element, i) => {
-            const { strDrinkThumb, idDrink, strDrink } = element;
-            return (i < max
-                && (
-                  <li key={ strDrink } data-testid={ `${i}-recomendation-card` }>
-                    {' '}
-                    <h3 data-testid={ `${i}-recomendation-title` }>{strDrink}</h3>
-                    <CardDrink
-                      key={ i }
-                      index={ i }
-                      strDrinkThumb={ strDrinkThumb }
-                      strDrink={ strDrink }
-                      id={ idDrink }
-                    />
-                    {' '}
-                  </li>));
-          }) }
-          </ul>
-          <button
-            className="start-button"
-            type="button"
-            data-testid="start-recipe-btn"
-          >
-            Start Recipe
-          </button>
+          />
+          <DrinksRecomedations />
+          <Link to={ `/foods/${id}/in-progress` }>
+            <button
+              className="start-button"
+              type="button"
+              data-testid="start-recipe-btn"
+            >
+              { recipeButton }
+            </button>
+          </Link>
         </>)}
     </div>
   );

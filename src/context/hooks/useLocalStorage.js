@@ -34,8 +34,6 @@ function useLocalStorage() {
     }
   };
   const sendToFavoriteRecipes = (arr) => {
-    console.log(arr, 'Use LocalStorage');
-
     setFavorite(arr);
     return localStorage
       .setItem('favoriteRecipes', JSON.stringify(arr));
