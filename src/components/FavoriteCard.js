@@ -1,11 +1,17 @@
 import { PropTypes } from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
+import useTimeOut from '../context/hooks/useTimeOut';
 import BlackHeart from '../images/blackHeartIcon.svg';
 import Share from '../images/shareIcon.svg';
+import Alert from './Alert';
 import './styles/FavoriteCard.css';
 
+const copy = require('clipboard-copy');
+
 function FavoriteCard({ name, category, image,
-  nationality, alcoholic, index, favorite }) {
+  nationality, alcoholic, index, favorite, favoriteMeal, isFavorite }) {
+  const { show, timeOut } = useTimeOut();
+
   const defineCategory = () => {
     if (alcoholic) {
       return `${alcoholic}`;
@@ -13,6 +19,8 @@ function FavoriteCard({ name, category, image,
 
     return `${nationality} - ${category}`;
   };
+
+  useEffect(() => isFavorite, []);
   return (
     <div className="favorite-meal-container">
       <div>
@@ -28,12 +36,12 @@ function FavoriteCard({ name, category, image,
           {defineCategory()}
         </p>
         <p data-testid={ `${index}-horizontal-name` }>{name}</p>
-
+        {show && <Alert />}
         <button
           type="button"
           onClick={ () => {
-            copy('link copiado');
-            //   timeOut();
+            copy('http://localhost:3000/foods/52771'); // alterar link copiado; req 63
+            timeOut();
           } }
         >
           <img
@@ -43,13 +51,13 @@ function FavoriteCard({ name, category, image,
           />
 
         </button>
-        <label htmlFor="favorite">
+        <label htmlFor={ `favorite-${name}` }>
           <input
             onClick={ ({ target }) => favorite({ target }) }
             type="checkbox"
-            //   defaultChecked={ isFavorite(testMeal[0].strMeal) }
-            //   value={ JSON.stringify(favoriteObj) }
-            id="favorite"
+            defaultChecked={ isFavorite }
+            value={ JSON.stringify(favoriteMeal) }
+            id={ `favorite-${name}` }
           />
           <img
             data-testid={ `${index}-horizontal-favorite-btn` }
@@ -73,6 +81,9 @@ FavoriteCard.propTypes = {
   alcoholic: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   favorite: PropTypes.func.isRequired,
+  favoriteMeal: PropTypes.objectOf(PropTypes.any).isRequired,
+  isFavorite: PropTypes.bool.isRequired,
+
 };
 
 export default FavoriteCard;
