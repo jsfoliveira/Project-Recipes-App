@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import useTimeOut from '../context/hooks/useTimeOut';
 import BlackHeart from '../images/blackHeartIcon.svg';
 import Share from '../images/shareIcon.svg';
@@ -20,7 +20,6 @@ function FavoriteCard({ name, category, image,
     return `${nationality} - ${category}`;
   };
 
-  useEffect(() => isFavorite, []);
   return (
     <div className="favorite-meal-container">
       <div>

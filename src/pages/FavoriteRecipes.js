@@ -7,7 +7,7 @@ import './styles/FavoriteRecipes.css';
 
 function FavoriteRecipes() {
   const { favoriteRecipe, setFavoriteRecipe, handleFavorite } = useFavorite();
-  const [filter, setFilter] = useState({ all: false, food: false, drink: false });
+  const [filter, setFilter] = useState({ food: false, drink: false });
   const { sendToFavoriteRecipes } = useLocalStorage();
   useEffect(() => {
     const browserFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -31,34 +31,35 @@ function FavoriteRecipes() {
   const filterMeals = ({ target }) => {
     const { name } = target;
     // let mealsToRender = favoriteRecipe;
-
-    if (name === 'all') {
-      setFilter(() => ({ ...filter, all: !filter.all, food: false, drink: false }));
-      // mealsToRender = favoriteRecipe;
-    }
     if (name === 'food') {
-      setFilter(() => ({ ...filter, all: false, food: !filter.food, drink: false }));
+      setFilter({ ...filter, food: !filter.food, drink: false });
       // mealsToRender = favoriteRecipe.filter((el) => el.type === 'food');
     }
     if (name === 'drink') {
-      setFilter(() => ({ ...filter, all: false, food: false, drink: !filter.drink }));
+      setFilter({ ...filter, food: false, drink: !filter.drink });
       // mealsToRender = favoriteRecipe.filter((el) => el.type === 'cocktails');
+    }
+
+    if (name === 'all') {
+      setFilter({ ...filter, food: false, drink: false });
     }
 
     // return renderFavoriteMeals(mealsToRender);
   };
 
   const renderFavoriteMeals = () => {
+    const { food, drink } = filter;
     const copyFavorites = [...favoriteRecipe];
     let mealsToRender = copyFavorites;
 
-    if (filter.all) {
+    if (!food && !drink) {
       mealsToRender = copyFavorites;
     }
-    if (filter.food) {
+
+    if (food) {
       mealsToRender = copyFavorites.filter((el) => el.type === 'food');
     }
-    if (filter.drink) {
+    if (drink) {
       mealsToRender = copyFavorites.filter((el) => el.type === 'cocktails');
     }
     console.log(mealsToRender);
