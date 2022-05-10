@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useFavorite from '../../context/hooks/useFavorite';
 import '../styles/Details.css';
@@ -10,10 +10,12 @@ import useTimeOut from '../../context/hooks/useTimeOut';
 import useLocalStorage from '../../context/hooks/useLocalStorage';
 import { fetchIDDrinks } from '../componentsDetails/fetchID';
 import MealsRecomedations from '../componentsDetails/RecomedationMealsDetails';
+import myContext from '../../context/myContext';
 
 const copy = require('clipboard-copy');
 
 function DrinkDetails() {
+  const { /* recipesDetails, */setRecipesDetails } = useContext(myContext);
   const { id } = useParams();
   const [recipe, setRecipe] = useState([]);
   const [ingredients, setIngredients] = useState([]);
@@ -134,7 +136,10 @@ function DrinkDetails() {
           </ul>
           <p data-testid="instructions">{ recipe[0].strInstructions }</p>
           <MealsRecomedations />
-          <Link to={ `/drinks/${id}/in-progress` }>
+          <Link
+            to={ `/drinks/${id}/in-progress` }
+            onClick={ () => setRecipesDetails(recipe) }
+          >
             <button
               className="start-button"
               type="button"

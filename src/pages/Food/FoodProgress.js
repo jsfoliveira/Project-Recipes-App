@@ -1,49 +1,48 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { PropTypes } from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Alert from '../../components/Alert';
 import useFavorite from '../../context/hooks/useFavorite';
 import useIngredients from '../../context/hooks/useIngredients';
 import useLocalStorage from '../../context/hooks/useLocalStorage';
 import useTimeOut from '../../context/hooks/useTimeOut';
+import myContext from '../../context/myContext';
 import BlackHeart from '../../images/blackHeartIcon.svg';
 import Share from '../../images/shareIcon.svg';
 import WhiteHeart from '../../images/whiteHeartIcon.svg';
 import renderIngredients from '../../services/renderIngredients';
-import testMeal from '../../services/testMeal';
 import './styles/FoodProgress.css';
 
 const copy = require('clipboard-copy');
 
-const FOOD = 'food';
-
-const { idMeal: id, strArea: nationality, strCategory: category,
-  strMeal: name, strMealThumb: image } = testMeal[0];
-const favoriteObj = {
-  id,
-  nationality,
-  type: 'food',
-  category,
-  alcoholicOrNot: '',
-  name,
-  image,
-};
-
 function FoodProgress({ match }) {
   const { params } = match;
+  const { recipesDetails } = useContext(myContext);
   const { ingredients, setIngredients, handleIngredients } = useIngredients();
   const { favoriteRecipe, setFavoriteRecipe, handleFavorite } = useFavorite();
   const { inProgress, sendToInProgress, sendToFavoriteRecipes } = useLocalStorage();
   const { show, timeOut } = useTimeOut();
 
+  const FOOD = 'food';
+
+  const { idMeal: id, strArea: nationality, strCategory: category,
+    strMeal: name, strMealThumb: image } = recipesDetails[0];
+  const favoriteObj = {
+    id,
+    nationality,
+    type: 'food',
+    category,
+    alcoholicOrNot: '',
+    name,
+    image,
+  };
+
   useEffect(() => {
     const browserStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (browserStorage) {
-      const { meals } = browserStorage;
-      if (Object.keys(meals).some((el) => el === params.id)) {
-        setIngredients([...meals[params.id]]);
-      }
+    const { meals } = browserStorage;
+    if (browserStorage && Object.keys(meals).some((el) => el === params.id)) {
+      setIngredients([...meals[params.id]]);
     }
   }, []);
 
@@ -52,7 +51,7 @@ function FoodProgress({ match }) {
 
     if (browserFavorite && browserFavorite.length > 0) {
       const recipe = browserFavorite
-        .find((el) => el.name === testMeal[0].strMeal);
+        .find((el) => el.name === recipesDetails[0].strMeal);
 
       setFavoriteRecipe([recipe]);
     }
@@ -78,7 +77,7 @@ function FoodProgress({ match }) {
     const browserFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (browserFavorite && Object.keys(browserFavorite).length > 0) {
       const recipeName = browserFavorite
-        .find((recipe) => recipe.name === testMeal[0].strMeal);
+        .find((recipe) => recipe.name === recipesDetails[0].strMeal);
       const { name: faveName } = recipeName;
       return favorite === faveName;
     }
@@ -90,12 +89,12 @@ function FoodProgress({ match }) {
         <img
           className="food-image"
           data-testid="recipe-photo"
-          src={ testMeal[0].strMealThumb }
+          src={ recipesDetails[0].strMealThumb }
           alt="Foto da Receita"
         />
       </div>
       <div className="food-title">
-        <h4 data-testid="recipe-title">{testMeal[0].strMeal}</h4>
+        <h4 data-testid="recipe-title">{recipesDetails[0].strMeal}</h4>
         <button
           data-testid="share-btn"
           type="button"
@@ -109,7 +108,7 @@ function FoodProgress({ match }) {
           <input
             onClick={ ({ target }) => handleFavorite({ target }) }
             type="checkbox"
-            defaultChecked={ isFavorite(testMeal[0].strMeal) }
+            defaultChecked={ isFavorite(recipesDetails[0].strMeal) }
             value={ JSON.stringify(favoriteObj) }
             id="favorite"
           />
@@ -125,7 +124,7 @@ function FoodProgress({ match }) {
       <div className="ingredients-container">
         <h4>Ingredientes</h4>
         <div className="ingredient-list">
-          {renderIngredients(testMeal)[0]
+          {renderIngredients(recipesDetails)[0]
             .filter((ingredient) => ingredient)
             .map((ingredient, idx) => (
               <label
@@ -148,7 +147,7 @@ function FoodProgress({ match }) {
       </div>
       <div className="instructions-container">
         <h4>Instruções</h4>
-        <p data-testid="instructions">{testMeal[0].strInstructions}</p>
+        <p data-testid="instructions">{recipesDetails[0].strInstructions}</p>
       </div>
       <button
         type="button"

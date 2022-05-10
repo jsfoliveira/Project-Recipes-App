@@ -1,49 +1,49 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { PropTypes } from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Alert from '../../components/Alert';
 import useFavorite from '../../context/hooks/useFavorite';
 import useIngredients from '../../context/hooks/useIngredients';
 import useLocalStorage from '../../context/hooks/useLocalStorage';
 import useTimeOut from '../../context/hooks/useTimeOut';
+import myContext from '../../context/myContext';
 import BlackHeart from '../../images/blackHeartIcon.svg';
 import Share from '../../images/shareIcon.svg';
 import WhiteHeart from '../../images/whiteHeartIcon.svg';
 import renderIngredients from '../../services/renderIngredients';
-import testDrink from '../../services/testDrink';
 import './styles/DrinkProgress.css';
 
 const copy = require('clipboard-copy');
 
 const DRINK = 'drink';
 
-const { idDrink: id, strArea: nationality, strCategory: category,
-  strAlcoholic: alcoholicOrNot, strDrink: name, strDrinkThumb: image } = testDrink[0];
-const favoriteObj = {
-  id,
-  nationality,
-  type: 'cocktails',
-  category,
-  alcoholicOrNot,
-  name,
-  image,
-};
-
 function FoodProgress({ match }) {
   const { params } = match;
+  const { recipesDetails } = useContext(myContext);
   const { ingredients, setIngredients, handleIngredients } = useIngredients();
   const { favoriteRecipe, setFavoriteRecipe, handleFavorite } = useFavorite();
   const { inProgress, sendToInProgress, sendToFavoriteRecipes } = useLocalStorage();
   const { show, timeOut } = useTimeOut();
 
+  const { idDrink: id, strArea: nationality, strCategory: category,
+    strAlcoholic: alcoholicOrNot,
+    strDrink: name, strDrinkThumb: image } = recipesDetails[0];
+  const favoriteObj = {
+    id,
+    nationality,
+    type: 'cocktails',
+    category,
+    alcoholicOrNot,
+    name,
+    image,
+  };
+
   useEffect(() => {
     const browserStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (browserStorage) {
-      const { cocktails } = browserStorage;
-      if (Object.keys(cocktails).length > 0) {
-        setIngredients([...cocktails[params.id]]);
-      }
+    const { cocktails } = browserStorage;
+    if (browserStorage && Object.keys(cocktails).length > 0) {
+      setIngredients([...cocktails[params.id]]);
     }
   }, []);
 
@@ -52,7 +52,7 @@ function FoodProgress({ match }) {
 
     if (browserFavorite && browserFavorite.length > 0) {
       const recipe = browserFavorite
-        .find((el) => el.name === testDrink[0].strDrink);
+        .find((el) => el.name === recipesDetails[0].strDrink);
 
       setFavoriteRecipe([recipe]);
     }
@@ -63,7 +63,6 @@ function FoodProgress({ match }) {
   }, [ingredients]);
 
   useEffect(() => {
-    console.log(favoriteRecipe);
     sendToFavoriteRecipes(favoriteRecipe);
   }, [favoriteRecipe]);
 
@@ -77,10 +76,9 @@ function FoodProgress({ match }) {
 
   const isFavorite = (favorite) => {
     const browserFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    console.log(browserFavorite);
     if (browserFavorite && Object.keys(browserFavorite).length > 0) {
       const recipeName = browserFavorite
-        .find((recipe) => recipe.name === testDrink[0].strDrink);
+        .find((recipe) => recipe.name === recipesDetails[0].strDrink);
       const { name: faveName } = recipeName;
       return favorite === faveName;
     }
@@ -92,12 +90,12 @@ function FoodProgress({ match }) {
         <img
           className="food-image"
           data-testid="recipe-photo"
-          src={ testDrink[0].strDrinkThumb }
+          src={ recipesDetails[0].strDrinkThumb }
           alt="Foto da Receita"
         />
       </div>
       <div className="food-title">
-        <h4 data-testid="recipe-title">{testDrink[0].strDrink}</h4>
+        <h4 data-testid="recipe-title">{recipesDetails[0].strDrink}</h4>
         <button
           data-testid="share-btn"
           type="button"
@@ -111,7 +109,7 @@ function FoodProgress({ match }) {
           <input
             onClick={ ({ target }) => handleFavorite({ target }) }
             type="checkbox"
-            defaultChecked={ isFavorite(testDrink[0].strDrink) }
+            defaultChecked={ isFavorite(recipesDetails[0].strDrink) }
             value={ JSON.stringify(favoriteObj) }
             id="favorite"
           />
@@ -127,7 +125,7 @@ function FoodProgress({ match }) {
       <div className="ingredients-container">
         <h4>Ingredientes</h4>
         <div className="ingredient-list">
-          {renderIngredients(testDrink)[0]
+          {renderIngredients(recipesDetails)[0]
             .filter((ingredient) => ingredient)
             .map((ingredient, idx) => (
               <label
@@ -150,7 +148,7 @@ function FoodProgress({ match }) {
       </div>
       <div className="instructions-container">
         <h4>Instruções</h4>
-        <p data-testid="instructions">{testDrink[0].strInstructions}</p>
+        <p data-testid="instructions">{recipesDetails[0].strInstructions}</p>
       </div>
       <button
         type="button"
