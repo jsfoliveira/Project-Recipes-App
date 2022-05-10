@@ -60,7 +60,7 @@ function FavoriteRecipes() {
       mealsToRender = copyFavorites.filter((el) => el.type === 'food');
     }
     if (drink) {
-      mealsToRender = copyFavorites.filter((el) => el.type === 'cocktails');
+      mealsToRender = copyFavorites.filter((el) => el.type === 'drink');
     }
     console.log(mealsToRender);
     return mealsToRender.map((recipe, idx) => (
@@ -74,6 +74,8 @@ function FavoriteRecipes() {
         isFavorite={ isFavorite(recipe.name) }
         favorite={ handleFavorite }
         favoriteMeal={ recipe }
+        type={ recipe.type }
+        id={ recipe.id }
         key={ idx }
       />
     ));
