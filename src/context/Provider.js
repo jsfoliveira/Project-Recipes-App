@@ -5,6 +5,7 @@ import myContext from './myContext';
 function Provider(props) {
   // FoodPage Context
   const [foods, setFoods] = useState([]);
+  const [recipesDetails, setRecipesDetails] = useState({});
   const [drinks, setDrinks] = useState([]);
   // Buttons for Foods and Drinks
   const [buttons, setButtons] = useState([]);
@@ -24,6 +25,8 @@ function Provider(props) {
     setSearchBar,
     setPath,
     setHeaderText,
+    recipesDetails,
+    setRecipesDetails,
     foods,
     setFoods,
     drinks,

@@ -10,7 +10,6 @@ function MealsRecomedations() {
     setLoading(true);
     const data = await firstFoods();
     await setRecomendation(data.meals);
-    console.log(data.meals);
     setLoading(false);
   };
 
