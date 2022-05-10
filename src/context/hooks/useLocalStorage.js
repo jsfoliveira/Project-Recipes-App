@@ -41,6 +41,7 @@ function useLocalStorage() {
 
   useEffect(() => {
     sendToInProgress();
+
   }, [inProgress, setInProgress]);
 
   return { sendToInProgress, inProgress, sendToFavoriteRecipes, favorite };

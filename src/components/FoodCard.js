@@ -15,7 +15,12 @@ function FoodCard(props) {
           alt="card"
         />
         <div className="card-body">
-          <p data-testid={ `${index}-card-name` } className="card-text">{ name }</p>
+          <p
+            data-testid={ `${index}-card-name` }
+            className="card-text"
+          >
+            { name }
+          </p>
         </div>
       </div>
     </Link>

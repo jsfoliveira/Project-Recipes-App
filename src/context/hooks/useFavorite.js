@@ -5,12 +5,12 @@ function useFavorite() {
 
   const handleFavorite = ({ target }) => {
     const { checked, value } = target;
-    const { id } = JSON.parse(value);
-
+    const { name } = JSON.parse(value);
     setFavoriteRecipe(() => (
       checked
         ? [...favoriteRecipe, JSON.parse(value)]
-        : [...favoriteRecipe].filter((el) => el.id !== id)
+        : [...favoriteRecipe].filter((el) => el.name !== name)
+
     ));
   };
 
