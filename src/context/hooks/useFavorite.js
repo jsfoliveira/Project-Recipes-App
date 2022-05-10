@@ -10,6 +10,7 @@ function useFavorite() {
       checked
         ? [...favoriteRecipe, JSON.parse(value)]
         : [...favoriteRecipe].filter((el) => el.name !== name)
+
     ));
   };
 
