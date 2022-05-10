@@ -3,6 +3,7 @@ import myContext from '../context/myContext';
 import fetchFoodCategories from '../services/fetchFoodCategories';
 import fetchFoods from '../services/fetchFoods';
 import { filterByFoodCategory } from '../services/fetchMeal';
+import './styles/FoodButtons.css';
 
 function FoodButtons() {
   const { buttons, setButtons, setFoods } = useContext(myContext);
@@ -37,8 +38,13 @@ function FoodButtons() {
 
   const max = 5;
   return (
-    <div>
-      <button type="button" data-testid="All-category-filter" onClick={ All }>
+    <div className="buttons-container">
+      <button
+        type="button"
+        className="food-buttons"
+        data-testid="All-category-filter"
+        onClick={ All }
+      >
         All
       </button>
       {buttons.map((e, i) => {
@@ -50,6 +56,7 @@ function FoodButtons() {
               key={ i }
               onClick={ clickBtn }
               name={ e.strCategory }
+              className="food-buttons"
             >
               {e.strCategory}
             </button>
