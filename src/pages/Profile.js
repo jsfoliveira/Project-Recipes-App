@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import './Profile.css';
 
 function Profile() {
   const [loginEmail, setLoginEmail] = useState('');
@@ -21,37 +22,38 @@ function Profile() {
   return (
     <div>
       <Header />
-      <h1
-        data-testid="profile-email"
-      >
-        {loginEmail}
-      </h1>
-      <Link to="/done-recipes">
-        <button
-          type="submit"
-          data-testid="profile-done-btn"
-        >
-          Done Recipes
-        </button>
-      </Link>
-      <Link to="/favorite-recipes">
-        <button
-          type="submit"
-          data-testid="profile-favorite-btn"
-        >
-          Favorite Recipes
-        </button>
-      </Link>
-      <Link to="/">
-        <button
-          type="submit"
-          data-testid="profile-logout-btn"
-          onClick={ clear }
-        >
-          Logout
-        </button>
-      </Link>
-      <Footer />
+      <div className="profile-container">
+        <h1 data-testid="profile-email" className="profile-email">{loginEmail}</h1>
+        <Link to="/done-recipes">
+          <button
+            type="submit"
+            data-testid="profile-done-btn"
+            className="profile-button"
+          >
+            Done Recipes
+          </button>
+        </Link>
+        <Link to="/favorite-recipes">
+          <button
+            type="submit"
+            data-testid="profile-favorite-btn"
+            className="profile-button"
+          >
+            Favorite Recipes
+          </button>
+        </Link>
+        <Link to="/">
+          <button
+            type="submit"
+            data-testid="profile-logout-btn"
+            className="profile-button"
+            onClick={ clear }
+          >
+            Logout
+          </button>
+        </Link>
+        <Footer />
+      </div>
     </div>
   );
 }
