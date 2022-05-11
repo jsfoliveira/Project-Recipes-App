@@ -21,11 +21,19 @@
   width: 100vw;
 }
 
+.form-label {
+  color: black;
+  font-family: Dancing Script , cursive;
+}
+
 .btn-primary {
   background-color: rgb(252, 145, 74);
   border-color: rgb(255, 193, 151);
   box-shadow: 2px 4px 4px #4b2004;
   color: rgb(34, 17, 2);
+  font-family: Dancing Script , cursive;
+  font-size: 18px;
+  width: 80px;
 }
 
 .btn-primary.disabled, .btn-primary:disabled {

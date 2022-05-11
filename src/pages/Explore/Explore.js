@@ -14,6 +14,7 @@ function Explore() {
             id="food"
             type="submit"
             data-testid="explore-foods"
+            className="explore-button"
           >
             Explore Foods
           </button>
@@ -23,6 +24,7 @@ function Explore() {
             id="drink"
             type="submit"
             data-testid="explore-drinks"
+            className="explore-button"
           >
             Explore Drinks
           </button>

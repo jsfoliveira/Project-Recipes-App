@@ -1,9 +1,9 @@
 .card {
   display: flex;
   flex: content;
-  width: 18rem;
   margin-left: auto;
   margin-right: auto;
+  width: 18rem;
 }
 
 .card-body {

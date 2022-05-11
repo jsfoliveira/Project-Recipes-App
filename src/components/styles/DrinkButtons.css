@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
-.food-buttons {
+.drink-buttons {
   background-color: rgb(252, 145, 74);
   border-color: rgb(255, 193, 151);
   border-radius: 10px;
@@ -9,4 +9,12 @@
   margin: 2px;
   margin-bottom: 10px;
   padding: 4px 6px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
 }

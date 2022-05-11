@@ -10,8 +10,11 @@ function CardDrink({ index, strDrinkThumb, strDrink, id }) {
           data-testid={ `${index}-card-img` }
           src={ strDrinkThumb }
           alt={ strDrink }
+          className="card-img-top"
         />
-        <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
+        <div className="card-body">
+          <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
+        </div>
       </div>
     </Link>
   );

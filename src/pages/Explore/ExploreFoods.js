@@ -14,6 +14,7 @@ function ExploreFoods() {
           type="button"
           data-testid="explore-by-ingredient"
           onClick={ () => history.push('/explore/foods/ingredients') }
+          className="explore-food-button"
         >
           By Ingredient
         </button>
@@ -21,13 +22,15 @@ function ExploreFoods() {
           type="button"
           data-testid="explore-by-nationality"
           onClick={ () => history.push('/explore/foods/nationalities') }
+          className="explore-food-button"
         >
           By Nationality
         </button>
         <button
           type="button"
           data-testid="explore-surprise"
-          onClick={ () => history.push('/foods/52771') } // alterar para rota dinâmica
+          onClick={ () => history.push('/foods/52771') } // alternar para rota dinâmica
+          className="explore-food-button"
         >
           Surprise me!
         </button>

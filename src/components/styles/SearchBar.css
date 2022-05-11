@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap') ;
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
 .search-input {
   border-radius: 10px;
@@ -21,7 +21,8 @@
   align-items: center;
   display: flex;
   flex-direction: row;
-  padding: 0.1px 10px;
+  justify-content: space-around;
+  padding: 2px 5px;
 }
 
 .button-search {
