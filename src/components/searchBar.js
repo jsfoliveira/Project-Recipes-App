@@ -6,6 +6,7 @@ import {
   requestName,
   requestLetra } from '../services/RequesSearchBar';
 import myContext from '../context/myContext';
+import './styles/SearchBar.css';
 
 function SearchBar({ type }) {
   const [valueRadioSearchBar, setValueRadioSearchBar] = useState('');
@@ -64,13 +65,15 @@ function SearchBar({ type }) {
           <label htmlFor="valueName">
             <input
               type="text"
+              className="search-input"
               data-testid="search-input"
               onChange={ (event) => setValueInputSearchBar(event.target.value) }
               id="valueName"
+              placeholder="Pesquisar"
             />
           </label>
           <div>
-            <label htmlFor="ingredient-search-radio">
+            <label htmlFor="ingredient-search-radio" className="label-filter">
               <input
                 type="radio"
                 name="flexRadioDefault"
@@ -82,7 +85,7 @@ function SearchBar({ type }) {
             </label>
           </div>
           <div>
-            <label htmlFor="name-search-radio">
+            <label htmlFor="name-search-radio" className="label-filter">
               <input
                 type="radio"
                 name="flexRadioDefault"
@@ -94,7 +97,7 @@ function SearchBar({ type }) {
             </label>
           </div>
           <div>
-            <label htmlFor="first-letter-search-radio">
+            <label htmlFor="first-letter-search-radio" className="label-filter">
               <input
                 type="radio"
                 name="flexRadioDefault"
@@ -106,6 +109,7 @@ function SearchBar({ type }) {
             </label>
           </div>
           <button
+            className="button-search"
             type="button"
             data-testid="exec-search-btn"
             onClick={ () => handleSearchBar() }

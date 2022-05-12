@@ -14,6 +14,7 @@ function ExploreDrinks() {
           type="button"
           data-testid="explore-by-ingredient"
           onClick={ () => history.push('/explore/drinks/ingredients') }
+          className="explore-drink-button"
         >
           By Ingredient
         </button>
@@ -22,6 +23,7 @@ function ExploreDrinks() {
           type="button"
           data-testid="explore-surprise"
           onClick={ () => history.push('/drinks/178319') } // alterar para rota dinâmica
+          className="explore-drink-button"
         >
           Surprise me!
         </button>

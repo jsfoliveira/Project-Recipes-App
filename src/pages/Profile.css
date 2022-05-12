@@ -1,13 +1,24 @@
-.explore-food-container {
+.profile-container {
   display: flex;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 56px;
-  padding: 10px;
+  margin-top: 60px;
 }
 
-.explore-food-button {
+.profile-email {
+  color: black;
+  display: flex;
+  font-family: Dancing Script , cursive;
+  font-size: 28px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  position: relative;
+  text-shadow: 1px 1px rgba(92, 46, 15, 0.247);
+}
+
+.profile-button {
   align-items: center;
   background-color: rgb(252, 145, 74);
   border-color: rgb(255, 193, 151);

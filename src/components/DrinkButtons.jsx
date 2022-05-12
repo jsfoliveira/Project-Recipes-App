@@ -4,6 +4,7 @@ import myContext from '../context/myContext';
 import { filterByCooksCategory } from '../services/fetchCockTails';
 import fetchDrinkCategories from '../services/fetchDrinkCategories';
 import fetchDrinks from '../services/fetchDrinks';
+import './styles/DrinkButtons.css';
 
 function DrinkButtons() {
   const { buttons, setButtons, setDrinks } = useContext(myContext);
@@ -39,8 +40,13 @@ function DrinkButtons() {
   const max = 5;
 
   return (
-    <div>
-      <button type="button" data-testid="All-category-filter" onClick={ All }>
+    <div className="buttons-container">
+      <button
+        type="button"
+        className="drink-buttons"
+        data-testid="All-category-filter"
+        onClick={ All }
+      >
         All
       </button>
       {buttons.map((e, i) => {
@@ -48,6 +54,7 @@ function DrinkButtons() {
           return (
             <button
               data-testid={ `${e.strCategory}-category-filter` }
+              className="drink-buttons"
               type="button"
               key={ i }
               name={ e.strCategory }
